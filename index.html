@@ -3,53 +3,218 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For Someone Special</title>
+    <title>For The Love of My Life</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700;900&family=Montserrat:wght@300;400;500;600&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --gold: #D4AF37;
+            --rose-gold: #E0BFB8;
+            --deep-pink: #D81B60;
+            --soft-pink: #F8E1E7;
+        }
         body {
             font-family: 'Montserrat', sans-serif;
             background-color: #fff9fb;
             color: #4a3b4a;
+            overflow-x: hidden;
         }
-        h1, h2, h3 {
+        h1, h2, h3, h4 {
             font-family: 'Playfair Display', serif;
             font-weight: 700;
+        }
+        .cursive {
+            font-family: 'Dancing Script', cursive;
         }
         .hero {
             background: linear-gradient(135deg, rgba(255,240,245,0.9) 0%, rgba(255,240,245,0.7) 100%), 
                         url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3a0c040b-9912-4cd8-9227-2be8b84fca61.png') center/cover;
             height: 100vh;
+            position: relative;
         }
-        .heart-bg {
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ff6b81" opacity="0.2"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>');
-            background-size: 100px;
-            opacity: 0.05;
+        .sparkle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            pointer-events: none;
         }
-        .gallery-item {
+        .floating-heart {
+            position: absolute;
+            opacity: 0.7;
+            animation: floatUp 8s linear infinite;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.7; }
+            90% { opacity: 0.7; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+        .gold-border {
+            border: 2px solid var(--gold);
+        }
+        .gold-text {
+            color: var(--gold);
+        }
+        .rose-bg {
+            background-color: var(--soft-pink);
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -30px;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            background: var(--gold);
+            border: 3px solid white;
+            border-radius: 50%;
+            z-index: 2;
+        }
+        .timeline::after {
+            content: '';
+            position: absolute;
+            left: -22px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--gold);
+        }
+        .music-controls {
+            background: rgba(255,255,255,0.3);
+            backdrop-filter: blur(10px);
+        }
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-auto-rows: 250px;
+            grid-gap: 1rem;
+            grid-auto-flow: dense;
+        }
+        .photo-grid-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
             transition: all 0.3s ease;
         }
-        .gallery-item:hover {
-            transform: scale(1.03);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        .photo-grid-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
         }
-        .flip-card {
-            perspective: 1000px;
+        .photo-grid-item:hover img {
+            transform: scale(1.1);
         }
-        .flip-card-inner {
-            transition: transform 0.6s;
+        .photo-grid-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 30%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .photo-grid-item:hover::after {
+            opacity: 1;
+        }
+        .photo-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem;
+            color: white;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+            z-index: 1;
+        }
+        .photo-grid-item:hover .photo-caption {
+            transform: translateY(0);
+        }
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+        }
+        .envelope {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            margin: 0 auto;
+        }
+        .envelope-front {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #f8c6d7, #f4a6c2);
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
             transform-style: preserve-3d;
+            transform-origin: bottom;
+            transition: all 0.8s ease;
+            z-index: 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-        .flip-card:hover .flip-card-inner {
-            transform: rotateY(180deg);
+        .envelope-open .envelope-front {
+            transform: rotateX(180deg);
         }
-        .flip-card-front, .flip-card-back {
-            backface-visibility: hidden;
+        .envelope-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #f5b6c9, #f195b3);
+            border-radius: 8px;
+            z-index: 1;
         }
-        .flip-card-back {
-            transform: rotateY(180deg);
+        .letter {
+            position: absolute;
+            width: 95%;
+            height: 95%;
+            background: white;
+            border-radius: 4px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.8s ease 0.4s;
+            transform-origin: bottom;
+            z-index: 0;
+        }
+        .envelope-open .letter {
+            transform: translateY(-170px);
+        }
+        .heartBeat {
+            animation: heartBeat 1.5s ease infinite;
+        }
+        @keyframes heartBeat {
+            0% { transform: scale(1); }
+            14% { transform: scale(1.3); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.3); }
+            70% { transform: scale(1); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(-5deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        .floating-love {
+            animation: float 4s ease-in-out infinite;
         }
         .reveal {
             opacity: 0;
@@ -60,83 +225,93 @@
             opacity: 1;
             transform: translateY(0);
         }
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
-        }
-        .floating {
-            animation: float 4s ease-in-out infinite;
-        }
     </style>
 </head>
 <body>
-    <div class="hero relative flex items-center justify-center text-center">
-        <div class="absolute inset-0 heart-bg"></div>
-        <div class="relative px-6 py-12 max-w-4xl mx-auto">
-            <div class="floating">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24 mx-auto text-pink-500" viewBox="0 0 20 20" fill="currentColor">
+    <!-- Floating decorative elements -->
+    <div id="floatingHearts"></div>
+    <div id="sparkles"></div>
+
+    <!-- Hero Section -->
+    <section class="hero relative flex items-center justify-center text-center overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-pink-50 opacity-70"></div>
+        <div class="relative px-6 py-12 max-w-4xl mx-auto z-10">
+            <h1 class="text-5xl md:text-7xl font-bold text-pink-800 mb-6 cursive">For My Beloved</h1>
+            <p class="text-xl md:text-2xl gold-text mb-8 tracking-wider">Every moment with you is a treasure</p>
+            
+            <div class="floating-love inline-block">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24 mx-auto text-pink-600 heartBeat" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
                 </svg>
             </div>
-            <h1 class="text-5xl md:text-6xl font-bold text-pink-700 mt-6 mb-4">For My Amazing Girlfriend</h1>
-            <p class="text-xl md:text-2xl text-pink-600">Scroll down to discover a special surprise...</p>
+            
             <div class="mt-12">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-pink-400 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                </svg>
+                <a href="#our-story" class="px-8 py-4 bg-transparent border-2 border-pink-600 text-pink-700 rounded-full font-semibold hover:bg-pink-600 hover:text-white transition duration-300 inline-flex items-center">
+                    Begin Our Journey
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-2 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                    </svg>
+                </a>
             </div>
         </div>
-    </div>
+    </section>
 
-    <section class="py-20 px-6 bg-white">
+    <!-- Our Story Timeline -->
+    <section id="our-story" class="py-24 px-6 bg-white relative">
         <div class="max-w-4xl mx-auto">
-            <div class="text-center mb-12 reveal">
-                <h2 class="text-4xl font-bold text-pink-700 mb-4">Reasons Why I Love You</h2>
-                <p class="text-xl text-gray-600">Click each card to discover what makes you so special</p>
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl font-bold text-pink-800 mb-4">Our Love Story</h2>
+                <div class="w-24 h-1 bg-pink-500 mx-auto"></div>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="flip-card h-64 reveal">
-                    <div class="flip-card-inner h-full rounded-lg shadow-lg">
-                        <div class="flip-card-front bg-pink-50 flex items-center justify-center p-6 rounded-lg">
-                            <h3 class="text-2xl text-pink-700 font-bold text-center">Reason #1</h3>
+            <div class="relative timeline pl-12">
+                <!-- Timeline Item 1 -->
+                <div class="relative mb-12 timeline-item reveal">
+                    <div class="p-8 bg-pink-50 rounded-lg shadow-md border-l-4 border-pink-600 relative">
+                        <div class="absolute -left-16 top-6 w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center gold-border">
+                            <i class="fas fa-heart text-pink-600"></i>
                         </div>
-                        <div class="flip-card-back bg-pink-100 flex items-center justify-center p-6 rounded-lg">
-                            <p class="text-lg text-pink-800">Your beautiful smile that brightens my darkest days</p>
+                        <div class="flex items-center mb-4">
+                            <h3 class="text-2xl font-bold text-pink-800 mr-4">The First Meet</h3>
+                            <span class="px-3 py-1 bg-pink-100 text-pink-800 rounded-full text-sm">May 2020</span>
                         </div>
-                    </div>
-                </div>
-                
-                <div class="flip-card h-64 reveal" style="transition-delay: 0.1s">
-                    <div class="flip-card-inner h-full rounded-lg shadow-lg">
-                        <div class="flip-card-front bg-pink-50 flex items-center justify-center p-6 rounded-lg">
-                            <h3 class="text-2xl text-pink-700 font-bold text-center">Reason #2</h3>
-                        </div>
-                        <div class="flip-card-back bg-pink-100 flex items-center justify-center p-6 rounded-lg">
-                            <p class="text-lg text-pink-800">The way you understand me without me saying a word</p>
+                        <p class="text-gray-700">The moment our eyes met across that crowded room, I knew my life would never be the same. Your smile lit up the room brighter than all the stars in the sky.</p>
+                        <div class="mt-4">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/5c1cda46-cabf-4329-bb4c-9eb432a5646e.png" alt="Romantic scene of couple meeting for first time in a cafe with warm lighting" class="w-full h-64 object-cover rounded-lg mt-3">
                         </div>
                     </div>
                 </div>
                 
-                <div class="flip-card h-64 reveal" style="transition-delay: 0.2s">
-                    <div class="flip-card-inner h-full rounded-lg shadow-lg">
-                        <div class="flip-card-front bg-pink-50 flex items-center justify-center p-6 rounded-lg">
-                            <h3 class="text-2xl text-pink-700 font-bold text-center">Reason #3</h3>
+                <!-- Timeline Item 2 -->
+                <div class="relative mb-12 timeline-item reveal" style="transition-delay: 0.1s">
+                    <div class="p-8 bg-pink-50 rounded-lg shadow-md border-l-4 border-pink-600 relative">
+                        <div class="absolute -left-16 top-6 w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center gold-border">
+                            <i class="fas fa-utensils text-pink-600"></i>
                         </div>
-                        <div class="flip-card-back bg-pink-100 flex items-center justify-center p-6 rounded-lg">
-                            <p class="text-lg text-pink-800">How you make ordinary moments feel extraordinary</p>
+                        <div class="flex items-center mb-4">
+                            <h3 class="text-2xl font-bold text-pink-800 mr-4">First Date</h3>
+                            <span class="px-3 py-1 bg-pink-100 text-pink-800 rounded-full text-sm">June 2020</span>
+                        </div>
+                        <p class="text-gray-700">That little Italian restaurant where we talked for hours until they turned the lights off. I loved how your eyes sparkled when you laughed at my terrible jokes.</p>
+                        <div class="mt-4">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/7fd7c378-b1c2-42cd-9f19-1a1c4a50e857.png" alt="Elegant restaurant setting for first date with candlelight and wine glasses" class="w-full h-64 object-cover rounded-lg mt-3">
                         </div>
                     </div>
                 </div>
                 
-                <div class="flip-card h-64 reveal" style="transition-delay: 0.3s">
-                    <div class="flip-card-inner h-full rounded-lg shadow-lg">
-                        <div class="flip-card-front bg-pink-50 flex items-center justify-center p-6 rounded-lg">
-                            <h3 class="text-2xl text-pink-700 font-bold text-center">Reason #4</h3>
+                <!-- Timeline Item 3 -->
+                <div class="relative mb-12 timeline-item reveal" style="transition-delay: 0.2s">
+                    <div class="p-8 bg-pink-50 rounded-lg shadow-md border-l-4 border-pink-600 relative">
+                        <div class="absolute -left-16 top-6 w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center gold-border">
+                            <i class="fas fa-heart text-pink-600"></i>
                         </div>
-                        <div class="flip-card-back bg-pink-100 flex items-center justify-center p-6 rounded-lg">
-                            <p class="text-lg text-pink-800">Your strength and courage that inspires me every day</p>
+                        <div class="flex items-center mb-4">
+                            <h3 class="text-2xl font-bold text-pink-800 mr-4">First "I Love You"</h3>
+                            <span class="px-3 py-1 bg-pink-100 text-pink-800 rounded-full text-sm">August 2020</span>
+                        </div>
+                        <p class="text-gray-700">Standing in the rain at midnight because I couldn't wait another moment to tell you. The way you whispered "I love you too" as the raindrops danced on your eyelashes...</p>
+                        <div class="mt-4">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/091ae802-5f8c-4cb0-8326-e8a39a691913.png" alt="Couple embracing in the rain at night with streetlights glowing" class="w-full h-64 object-cover rounded-lg mt-3">
                         </div>
                     </div>
                 </div>
@@ -144,143 +319,286 @@
         </div>
     </section>
 
-    <section class="py-20 px-6 bg-pink-50">
+    <!-- Reasons I Love You -->
+    <section class="py-24 px-6 bg-pink-50 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"%23D81B60\"><path d=\"M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z\"/></svg>'); background-size: 200px;"></div>
+        <div class="max-w-5xl mx-auto relative">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl font-bold text-pink-800 mb-4">The Little Things I Love About You</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">All those special moments and qualities that make you uniquely you</p>
+            </div>
+            
+            <div class="grid gap-8 md:grid-cols-3">
+                <!-- Card 1 -->
+                <div class="bg-white p-8 rounded-xl shadow-lg transform transition hover:-translate-y-2 hover:shadow-xl reveal">
+                    <div class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mb-6 mx-auto gold-border">
+                        <i class="fas fa-smile-beam text-2xl text-pink-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-center text-pink-800 mb-4">Your Laugh</h3>
+                    <p class="text-gray-700 text-center">The way your nose crinkles when something really makes you laugh, like tiny waves dancing across your face.</p>
+                </div>
+                
+                <!-- Card 2 -->
+                <div class="bg-white p-8 rounded-xl shadow-lg transform transition hover:-translate-y-2 hover:shadow-xl reveal" style="transition-delay: 0.1s">
+                    <div class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mb-6 mx-auto gold-border">
+                        <i class="fas fa-hand-holding-heart text-2xl text-pink-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-center text-pink-800 mb-4">Your Kindness</h3>
+                    <p class="text-gray-700 text-center">How you'll stop to pet every dog we pass and ask the barista about their day - your heart is endless.</p>
+                </div>
+                
+                <!-- Card 3 -->
+                <div class="bg-white p-8 rounded-xl shadow-lg transform transition hover:-translate-y-2 hover:shadow-xl reveal" style="transition-delay: 0.2s">
+                    <div class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mb-6 mx-auto gold-border">
+                        <i class="fas fa-moon text-2xl text-pink-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-center text-pink-800 mb-4">Morning You</h3>
+                    <p class="text-gray-700 text-center">Your sleepy mumbles and the way you fight waking up like a kitten resisting bath time.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Memory Gallery -->
+    <section class="py-24 px-6 bg-white">
         <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-12 reveal">
-                <h2 class="text-4xl font-bold text-pink-700 mb-4">Our Beautiful Memories</h2>
-                <p class="text-xl text-gray-600">These moments with you are my most treasured</p>
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl font-bold text-pink-800 mb-4">Our Treasured Moments</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">A collection of beautiful memories we've created together</p>
             </div>
             
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="gallery-item rounded-lg overflow-hidden shadow-lg reveal">
-                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/5750e843-6dbe-41da-bb7a-17f48861a4c7.png" alt="Romantic first date at a cozy restaurant with candlelight and wine glasses" class="w-full h-64 object-cover">
-                    <div class="p-6 bg-white">
-                        <h3 class="text-xl font-bold text-pink-700 mb-2">Our First Date</h3>
-                        <p class="text-gray-600">The night I knew you were someone special</p>
+            <div class="photo-grid">
+                <!-- Photo 1 -->
+                <div class="photo-grid-item reveal">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e111db0e-3ab7-4757-b9e7-d96363c1cab5.png" alt="Couple watching sunset on beach with golden light reflecting on water">
+                    <div class="photo-caption">
+                        <h4 class="font-bold">Summer Sunset</h4>
+                        <p class="text-sm">Santa Monica • June 2021</p>
                     </div>
                 </div>
                 
-                <div class="gallery-item rounded-lg overflow-hidden shadow-lg reveal" style="transition-delay: 0.1s">
-                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/774a34ef-d691-41bb-81ff-fbefe8e43274.png" alt="Couple smiling and holding hands on a tropical beach with palm trees" class="w-full h-64 object-cover">
-                    <div class="p-6 bg-white">
-                        <h3 class="text-xl font-bold text-pink-700 mb-2">Our Vacation</h3>
-                        <p class="text-gray-600">Exploring new places hand in hand</p>
+                <!-- Photo 2 -->
+                <div class="photo-grid-item reveal" style="transition-delay: 0.1s">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e6a2ad11-1d7b-4e4d-b416-cd1964689dd3.png" alt="Couple in formal wear laughing at a wedding reception">
+                    <div class="photo-caption">
+                        <h4 class="font-bold">Sarah's Wedding</h4>
+                        <p class="text-sm">September 2021</p>
                     </div>
                 </div>
                 
-                <div class="gallery-item rounded-lg overflow-hidden shadow-lg reveal" style="transition-delay: 0.2s">
-                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/bb3b228b-97d7-440b-aa38-3c9c121d5840.png" alt="Couple celebrating anniversary with champagne toast and romantic dinner" class="w-full h-64 object-cover">
-                    <div class="p-6 bg-white">
-                        <h3 class="text-xl font-bold text-pink-700 mb-2">Our Anniversary</h3>
-                        <p class="text-gray-600">Celebrating another year of love</p>
+                <!-- Photo 3 -->
+                <div class="photo-grid-item reveal" style="transition-delay: 0.2s">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a90a35dc-3b5f-479e-b2e6-9a5a4ff90922.png" alt="Couple hiking in mountains with stunning valley view behind them">
+                    <div class="photo-caption">
+                        <h4 class="font-bold">Mountain Adventure</h4>
+                        <p class="text-sm">Colorado • July 2022</p>
+                    </div>
+                </div>
+                
+                <!-- Photo 4 -->
+                <div class="photo-grid-item reveal" style="transition-delay: 0.3s">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/6cd83d16-1dd1-43c7-b1b2-cffd6be4b582.png" alt="Couple cooking together in kitchen, flour on faces from baking">
+                    <div class="photo-caption">
+                        <h4 class="font-bold">Baking Disaster</h4>
+                        <p class="text-sm">Our Kitchen • December 2022</p>
+                    </div>
+                </div>
+                
+                <!-- Photo 5 -->
+                <div class="photo-grid-item reveal" style="transition-delay: 0.4s">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3d269c69-3cc2-4fa8-859a-cd499e971666.png" alt="Couple cuddling on couch watching movie with cozy blankets">
+                    <div class="photo-caption">
+                        <h4 class="font-bold">Lazy Sunday</h4>
+                        <p class="text-sm">February 2023</p>
+                    </div>
+                </div>
+                
+                <!-- Photo 6 -->
+                <div class="photo-grid-item reveal" style="transition-delay: 0.5s">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/874f21d0-0354-4035-888e-11d528ae4efa.png" alt="Romantic dinner setup with candles and wine glasses on rooftop">
+                    <div class="photo-caption">
+                        <h4 class="font-bold">Anniversary Dinner</h4>
+                        <p class="text-sm">The Rooftop • May 2023</p>
                     </div>
                 </div>
             </div>
             
-            <div class="mt-12 text-center reveal" style="transition-delay: 0.3s">
-                <button id="moreMemoriesBtn" class="px-6 py-3 bg-pink-500 text-white rounded-full font-semibold hover:bg-pink-600 transition duration-300">
-                    Show Me More Memories
+            <div class="text-center mt-12 reveal">
+                <button id="viewMoreBtn" class="px-8 py-3 bg-pink-600 text-white rounded-full font-semibold hover:bg-pink-700 transition duration-300 inline-flex items-center">
+                    View More Memories
+                    <i class="fas fa-images ml-2"></i>
                 </button>
-                <div id="moreMemories" class="hidden mt-6">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                        <div class="gallery-item rounded-lg overflow-hidden shadow-lg">
-                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/6fe98445-89c9-4143-977e-b88211d68e09.png" alt="Couple cooking together in a modern kitchen, laughing and enjoying each other's company" class="w-full h-64 object-cover">
-                            <div class="p-6 bg-white">
-                                <h3 class="text-xl font-bold text-pink-700 mb-2">Everyday Life</h3>
-                                <p class="text-gray-600">Even ordinary days are magical with you</p>
-                            </div>
-                        </div>
-                        
-                        <div class="gallery-item rounded-lg overflow-hidden shadow-lg">
-                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/65b8a0c9-6909-46ab-b9ae-57a48bc4be6d.png" alt="Couple hiking in the mountains with breathtaking views in the background" class="w-full h-64 object-cover">
-                            <div class="p-6 bg-white">
-                                <h3 class="text-xl font-bold text-pink-700 mb-2">Our Adventures</h3>
-                                <p class="text-gray-600">Facing challenges together makes us stronger</p>
-                            </div>
-                        </div>
-                        
-                        <div class="gallery-item rounded-lg overflow-hidden shadow-lg">
-                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3d269c69-3cc2-4fa8-859a-cd499e971666.png" alt="Couple cuddling on a couch watching a movie with cozy blankets" class="w-full h-64 object-cover">
-                            <div class="p-6 bg-white">
-                                <h3 class="text-xl font-bold text-pink-700 mb-2">Quiet Times</h3>
-                                <p class="text-gray-600">Your presence makes every moment peaceful</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            </div>
+        </div>
+        
+        <!-- Lightbox -->
+        <div id="lightbox" class="lightbox hidden">
+            <div class="lightbox-content relative">
+                <img id="lightboxImage" src="" alt="" class="max-w-full max-h-full">
+                <button id="closeLightbox" class="absolute top-4 right-4 text-white bg-black bg-opacity-50 rounded-full p-2 hover:bg-opacity-70">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
             </div>
         </div>
     </section>
 
-    <section class="py-20 px-6 bg-white">
+    <!-- Romantic Music Player -->
+    <section class="py-20 px-6 bg-gradient-to-b from-pink-100 to-pink-200">
         <div class="max-w-4xl mx-auto">
-            <div class="reveal">
-                <div class="bg-pink-50 rounded-xl p-8 md:p-12 shadow-lg">
-                    <div class="flex flex-col md:flex-row items-center">
-                        <div class="md:w-1/3 mb-6 md:mb-0">
-                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/6e651919-763a-4557-b4d5-e13122d6228f.png" alt="Close-up of a handwritten love letter with a red wax seal on pink paper" class="w-full h-auto rounded-lg shadow-md">
-                        </div>
-                        <div class="md:w-2/3 md:pl-10">
-                            <h2 class="text-3xl font-bold text-pink-700 mb-4">A Letter Just For You</h2>
-                            <div class="prose max-w-none text-gray-700">
-                                <p>My love,</p>
-                                <p>From the moment we met, you've brought light into my life in ways I never imagined possible. Every day with you is a gift that I cherish deeply.</p>
-                                <p>I love how [personal trait you adore] makes you uniquely you. The way you [specific behavior or habit] shows your incredible [quality]. And when you [another specific thing], my heart overflows with love.</p>
-                                <p>What I want you to know most of all is that you are loved beyond measure, appreciated beyond words, and cherished beyond time.</p>
-                                <p>Forever yours,</p>
-                                <p>________</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="text-center mb-12 reveal">
+                <h2 class="text-4xl font-bold text-pink-800 mb-4">Songs That Remind Me of Us</h2>
+                <p class="text-lg text-gray-600">Play our soundtrack while you browse</p>
             </div>
-        </div>
-    </section>
-
-    <section class="py-20 px-6 bg-pink-50">
-        <div class="max-w-4xl mx-auto text-center">
-            <div class="reveal">
-                <h2 class="text-4xl font-bold text-pink-700 mb-6">Today's Romantic Thought</h2>
-                <div class="bg-white p-8 rounded-lg shadow-lg mb-8">
-                    <p id="romanticQuote" class="text-2xl text-gray-800 italic mb-4">"Love is not about how many days, weeks or months you've been together, it's all about how much you love each other every day."</p>
-                    <button id="newQuoteBtn" class="px-6 py-2 bg-pink-500 text-white rounded-full font-semibold hover:bg-pink-600 transition duration-300">
-                        Another Thought
+            
+            <div class="bg-white rounded-xl shadow-xl overflow-hidden reveal">
+                <div class="p-6 music-controls rounded-t-xl flex items-center justify-between bg-gradient-to-r from-pink-600 to-pink-500">
+                    <div>
+                        <h3 class="text-xl font-bold text-white">Perfect</h3>
+                        <p class="text-pink-200">Ed Sheeran</p>
+                    </div>
+                    <button id="playBtn" class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-pink-600 hover:bg-pink-100 transition duration-300">
+                        <i class="fas fa-play text-lg"></i>
                     </button>
                 </div>
-                <div class="mt-12">
-                    <p class="text-xl text-pink-700 font-semibold mb-4">I love you more than words can express</p>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-pink-500 mx-auto" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
-                    </svg>
+                <div class="p-6">
+                    <audio id="song" loop>
+                        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+                    </audio>
+                    <div class="grid grid-cols-3 gap-4">
+                        <div class="p-4 bg-pink-50 rounded-lg text-center cursor-pointer hover:bg-pink-100 transition duration-300 music-card" data-song="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" data-title="Perfect" data-artist="Ed Sheeran">
+                            <div class="w-16 h-16 bg-pink-200 rounded-full mx-auto mb-3 flex items-center justify-center gold-border">
+                                <i class="fas fa-music text-pink-700"></i>
+                            </div>
+                            <h4 class="font-semibold text-pink-800">Perfect</h4>
+                            <p class="text-sm text-pink-600">Ed Sheeran</p>
+                        </div>
+                        <div class="p-4 bg-pink-50 rounded-lg text-center cursor-pointer hover:bg-pink-100 transition duration-300 music-card" data-song="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" data-title="All of Me" data-artist="John Legend">
+                            <div class="w-16 h-16 bg-pink-200 rounded-full mx-auto mb-3 flex items-center justify-center gold-border">
+                                <i class="fas fa-music text-pink-700"></i>
+                            </div>
+                            <h4 class="font-semibold text-pink-800">All of Me</h4>
+                            <p class="text-sm text-pink-600">John Legend</p>
+                        </div>
+                        <div class="p-4 bg-pink-50 rounded-lg text-center cursor-pointer hover:bg-pink-100 transition duration-300 music-card" data-song="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" data-title="A Thousand Years" data-artist="Christina Perri">
+                            <div class="w-16 h-16 bg-pink-200 rounded-full mx-auto mb-3 flex items-center justify-center gold-border">
+                                <i class="fas fa-music text-pink-700"></i>
+                            </div>
+                            <h4 class="font-semibold text-pink-800">A Thousand Years</h4>
+                            <p class="text-sm text-pink-600">Christina Perri</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="bg-pink-800 text-white py-12 px-6">
-        <div class="max-w-4xl mx-auto text-center">
-            <div class="mb-8">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-pink-300" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
-                </svg>
-                <h3 class="text-2xl font-bold mt-2">Made With Love</h3>
+    <!-- Love Letter -->
+    <section class="py-24 px-6 bg-white">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl font-bold text-pink-800 mb-4">A Letter For You</h2>
+                <p class="text-lg text-gray-600">Click to open this special message</p>
             </div>
-            <p class="text-pink-200 mb-4">This website was created to remind you how incredibly special you are</p>
-            <p class="text-pink-300 text-sm">Hover over the heart below for a secret message</p>
-            <div class="mt-6 group">
-                <div class="relative inline-block">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-pink-400 group-hover:text-pink-300 transition duration-300" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
-                    </svg>
-                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
-                        <span class="text-white font-bold">Always & Forever</span>
+            
+            <div class="reveal">
+                <div class="envelope cursor-pointer" id="envelope" onclick="this.classList.toggle('envelope-open')">
+                    <div class="envelope-front flex flex-col items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-pink-700 mb-3" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+                        </svg>
+                        <h3 class="text-xl font-bold text-pink-700 cursive">To My Love</h3>
+                    </div>
+                    <div class="envelope-back"></div>
+                    <div class="letter">
+                        <div class="h-full overflow-y-auto">
+                            <p class="text-gray-800 mb-4 cursive text-lg">My Dearest,</p>
+                            <p class="text-gray-700 mb-4">If I were to write all the reasons I love you, I would fill libraries more vast than any in the world. But since this paper is small, I'll try to capture the essence...</p>
+                            <p class="text-gray-700 mb-4">I love the way your hand fits perfectly in mine, like two puzzle pieces finally reunited. I love how your laughter bubbles up from deep inside and explodes into the room like fireworks.</p>
+                            <p class="text-gray-700 mb-4">I love how you hum off-key in the shower and pretend not to when I catch you. How you insist on eating the broken chips first to "save the good ones for last."</p>
+                            <p class="text-gray-700 mb-4">But most of all, I love who I am when I'm with you. You reflect back the best parts of me that I didn't even know were there.</p>
+                            <p class="text-gray-800 mt-8 cursive text-lg">With all my heart,</p>
+                            <p class="text-gray-700 cursive">Your [Name]</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+    </section>
+
+    <!-- Countdown & Final Section -->
+    <section class="py-24 px-6 bg-pink-800 text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"white\"><path d=\"M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z\"/></svg>'); background-size: 200px;"></div>
+        <div class="max-w-4xl mx-auto relative text-center">
+            <div class="reveal">
+                <h2 class="text-4xl font-bold mb-6">Counting Down to Our Next Chapter</h2>
+                <div class="grid grid-cols-4 gap-4 max-w-md mx-auto mb-12">
+                    <div class="bg-white bg-opacity-20 p-4 rounded-lg">
+                        <div id="days" class="text-4xl font-bold mb-2">0</div>
+                        <div>Days</div>
+                    </div>
+                    <div class="bg-white bg-opacity-20 p-4 rounded-lg">
+                        <div id="hours" class="text-4xl font-bold mb-2">0</div>
+                        <div>Hours</div>
+                    </div>
+                    <div class="bg-white bg-opacity-20 p-4 rounded-lg">
+                        <div id="minutes" class="text-4xl font-bold mb-2">0</div>
+                        <div>Minutes</div>
+                    </div>
+                    <div class="bg-white bg-opacity-20 p-4 rounded-lg">
+                        <div id="seconds" class="text-4xl font-bold mb-2">0</div>
+                        <div>Seconds</div>
+                    </div>
+                </div>
+                <p class="text-xl mb-8 max-w-2xl mx-auto">Until our next anniversary on <span class="gold-text font-semibold">June 15, 2024</span></p>
+                <button class="px-8 py-3 bg-pink-600 text-white rounded-full font-semibold hover:bg-pink-700 transition duration-300 inline-flex items-center">
+                    Make a Promise for That Day
+                    <i class="fas fa-heart ml-2"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-pink-900 text-white py-12 px-6 text-center">
+        <p class="mb-4">Created with <i class="fas fa-heart text-red-400"></i> for the most incredible woman I know</p>
+        <p class="text-sm text-pink-300">Every day with you is the best day of my life</p>
     </footer>
 
     <script>
+        // Create floating hearts
+        function createHearts() {
+            const container = document.getElementById('floatingHearts');
+            const numHearts = 15;
+            
+            for (let i = 0; i < numHearts; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'floating-heart';
+                heart.innerHTML = '❤️';
+                heart.style.left = `${Math.random() * 100}vw`;
+                heart.style.top = `${Math.random() * 100}vh`;
+                heart.style.fontSize = `${Math.random() * 10 + 10}px`;
+                heart.style.animationDelay = `${Math.random() * 5}s`;
+                container.appendChild(heart);
+            }
+        }
+        
+        // Create sparkle effects
+        function createSparkles() {
+            document.addEventListener('mousemove', (e) => {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.width = `${Math.random() * 10 + 5}px`;
+                sparkle.style.height = sparkle.style.width;
+                sparkle.style.left = `${e.clientX}px`;
+                sparkle.style.top = `${e.clientY}px`;
+                
+                document.getElementById('sparkles').appendChild(sparkle);
+                
+                setTimeout(() => {
+                    sparkle.remove();
+                }, 500);
+            });
+        }
+        
         // Scroll reveal animation
         const revealElements = document.querySelectorAll('.reveal');
         
@@ -295,43 +613,92 @@
             });
         }
         
-        window.addEventListener('scroll', checkReveal);
-        window.addEventListener('load', checkReveal);
+        // Lightbox gallery
+        const galleryItems = document.querySelectorAll('.photo-grid-item');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImage');
+        const closeLightbox = document.getElementById('closeLightbox');
         
-        // More memories button
-        const moreMemoriesBtn = document.getElementById('moreMemoriesBtn');
-        const moreMemories = document.getElementById('moreMemories');
-        
-        moreMemoriesBtn.addEventListener('click', function() {
-            moreMemories.classList.toggle('hidden');
-            this.textContent = moreMemories.classList.contains('hidden') ? 'Show Me More Memories' : 'Hide Memories';
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const imgSrc = item.querySelector('img').src;
+                const imgAlt = item.querySelector('img').alt;
+                lightboxImg.src = imgSrc;
+                lightboxImg.alt = imgAlt;
+                lightbox.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            });
         });
         
-        // Romantic quotes
-        const quotes = [
-            "Love is when the other person's happiness is more important than your own.",
-            "You don't love someone for their looks, or their clothes, or for their fancy car, but because they sing a song only you can hear.",
-            "The best thing to hold onto in life is each other.",
-            "I saw that you were perfect, and so I loved you. Then I saw that you were not perfect and I loved you even more.",
-            "Love is composed of a single soul inhabiting two bodies.",
-            "If I had a flower for every time I thought of you, I could walk through my garden forever.",
-            "Grow old with me, the best is yet to be.",
-            "You're the closest to heaven that I'll ever be.",
-            "I love you not only for what you are, but for what I am when I'm with you."
-        ];
+        closeLightbox.addEventListener('click', () => {
+            lightbox.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        });
         
-        const romanticQuote = document.getElementById('romanticQuote');
-        const newQuoteBtn = document.getElementById('newQuoteBtn');
+        // Music player
+        const song = document.getElementById('song');
+        const playBtn = document.getElementById('playBtn');
+        let isPlaying = false;
         
-        function getRandomQuote() {
-            return quotes[Math.floor(Math.random() * quotes.length)];
+        playBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                song.pause();
+                playBtn.innerHTML = '<i class="fas fa-play text-lg"></i>';
+            } else {
+                song.play();
+                playBtn.innerHTML = '<i class="fas fa-pause text-lg"></i>';
+            }
+            isPlaying = !isPlaying;
+        });
+        
+        // Change songs
+        const musicCards = document.querySelectorAll('.music-card');
+        const songTitle = document.querySelector('.music-controls h3');
+        const songArtist = document.querySelector('.music-controls p');
+        
+        musicCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const newSong = card.dataset.song;
+                const newTitle = card.dataset.title;
+                const newArtist = card.dataset.artist;
+                
+                song.src = newSong;
+                songTitle.textContent = newTitle;
+                songArtist.textContent = newArtist;
+                
+                if (isPlaying) {
+                    song.play();
+                }
+            });
+        });
+        
+        // Countdown timer
+        function updateCountdown() {
+            const targetDate = new Date('June 15, 2024 00:00:00').getTime();
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+            
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').textContent = days;
+            document.getElementById('hours').textContent = hours;
+            document.getElementById('minutes').textContent = minutes;
+            document.getElementById('seconds').textContent = seconds;
         }
         
-        newQuoteBtn.addEventListener('click', function() {
-            romanticQuote.textContent = getRandomQuote();
+        // Initialize everything
+        window.addEventListener('DOMContentLoaded', () => {
+            createHearts();
+            createSparkles();
+            checkReveal();
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
         });
+        
+        window.addEventListener('scroll', checkReveal);
     </script>
 </body>
 </html>
-
-    
