@@ -3,421 +3,335 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For My Love</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <title>For Someone Special</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
         body {
             font-family: 'Montserrat', sans-serif;
-            background: linear-gradient(to bottom right, #ffcdd2, #f8bbd0, #e1bee7);
-            color: #333;
-            overflow-x: hidden;
-            animation: gradientBG 15s ease infinite;
-            background-size: 400% 400%;
+            background-color: #fff9fb;
+            color: #4a3b4a;
         }
-        
-        @keyframes gradientBG {
-            0% {background-position: 0% 50%;}
-            50% {background-position: 100% 50%;}
-            100% {background-position: 0% 50%;}
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
         }
-        
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 20px;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+        .hero {
+            background: linear-gradient(135deg, rgba(255,240,245,0.9) 0%, rgba(255,240,245,0.7) 100%), 
+                        url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3a0c040b-9912-4cd8-9227-2be8b84fca61.png') center/cover;
+            height: 100vh;
         }
-        
-        header {
-            text-align: center;
-            margin-bottom: 30px;
+        .heart-bg {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ff6b81" opacity="0.2"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>');
+            background-size: 100px;
+            opacity: 0.05;
         }
-        
-        h1 {
-            font-family: 'Dancing Script', cursive;
-            font-size: 3.5rem;
-            color: #d23669;
-            margin-bottom: 15px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        
-        .photo-box-container {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            margin-bottom: 30px;
-        }
-        
-        .photo-box {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            overflow: hidden;
-            position: relative;
-            background: rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(5px);
-            border: 3px solid rgba(255, 255, 255, 0.6);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        .photo-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .gif-box {
-            
-            margin: 20px auto;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-            animation: pulse 2s infinite;
-        }
-        
-        .hero-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .countdown-container {
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            margin-bottom: 30px;
-            text-align: center;
-            color: white;
-            width: 100%;
-            max-width: 700px;
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% {transform: scale(1);}
-            50% {transform: scale(1.02);}
-            100% {transform: scale(1);}
-        }
-        
-        .countdown-title {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            font-family: 'Dancing Script', cursive;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-        }
-        
-        .countdown {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            margin-top: 20px;
-        }
-        
-        .countdown-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        .gallery-item {
             transition: all 0.3s ease;
         }
-        
-        .countdown-item:hover {
-            transform: translateY(-5px);
+        .gallery-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
-        
-        .countdown-number {
-            font-size: 3rem;
-            font-weight: bold;
-            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
-            width: 100px;
-            height: 100px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            animation: float 4s ease-in-out infinite;
+        .flip-card {
+            perspective: 1000px;
         }
-        
+        .flip-card-inner {
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        .flip-card-front, .flip-card-back {
+            backface-visibility: hidden;
+        }
+        .flip-card-back {
+            transform: rotateY(180deg);
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
         @keyframes float {
-            0% {transform: translateY(0px) rotate(0deg);}
-            50% {transform: translateY(-20px) rotate(3deg);}
-            100% {transform: translateY(0px) rotate(0deg);}
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
         }
-
-        @keyframes pulse {
-            0% {transform: scale(1);}
-            50% {transform: scale(1.05);}
-            100% {transform: scale(1);}
-        }
-        
-        .countdown-label {
-            font-size: 1rem;
-            text-transform: uppercase;
-            opacity: 0.9;
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
-        
-        .message-box {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 600px;
-            margin-bottom: 30px;
-            position: relative;
-            border: 2px solid #ffb6c1;
-            animation: wiggle 3s ease infinite;
-            overflow: hidden;
-        }
-        
-        @keyframes wiggle {
-            0%, 100% {transform: rotate(0deg);}
-            25% {transform: rotate(1deg);}
-            75% {transform: rotate(-1deg);}
-        }
-        
-        .emoji {
-            position: absolute;
-            font-size: 1.5rem;
-            animation: floatEmoji 5s ease infinite;
-            opacity: 0.7;
-        }
-        
-        @keyframes floatEmoji {
-            0% {transform: translateY(0) rotate(0deg);}
-            50% {transform: translateY(-20px) rotate(20deg);}
-            100% {transform: translateY(0) rotate(0deg);}
-        }
-        
-        .message-box::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 10px;
-            background: linear-gradient(90deg, #ff758c, #ff7eb3);
-            border-radius: 15px 15px 0 0;
-        }
-        
-        .message-title {
-            font-size: 1.2rem;
-            color: #d23669;
-            margin-bottom: 15px;
-            text-align: center;
-            font-family: 'Dancing Script', cursive;
-        }
-        
-        .message-content {
-            font-size: 1rem;
-            line-height: 1.6;
-            text-align: center;
-            color: #555;
-        }
-        
-        .music-player {
-            margin-top: 20px;
-            width: 100%;
-            max-width: 600px;
-        }
-        
-        .music-title {
-            font-size: 1rem;
-            color: #d23669;
-            margin-bottom: 10px;
-            text-align: center;
-            font-weight: 600;
-        }
-        
-        footer {
-            margin-top: 30px;
-            text-align: center;
-            font-size: 0.9rem;
-            color: #777;
-        }
-        
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero-image {
-                height: 250px;
-            }
-            
-            .countdown-number {
-                width: 60px;
-                height: 60px;
-                font-size: 2rem;
-            }
-            
-            .countdown-label {
-                font-size: 0.8rem;
-            }
+        .floating {
+            animation: float 4s ease-in-out infinite;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>For My Beautiful Biwiji </h1>
-        </header>
-        
-        <div class="photo-box-container">
-            <div class="photo-box">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQN3BKFaTPZHXjFNKxtIrnGUJghUcn2KvV2GSlYeYY33XwX2JKTr6yQKQF8mlFd9rEsi30&usqp=CAU">
+    <div class="hero relative flex items-center justify-center text-center">
+        <div class="absolute inset-0 heart-bg"></div>
+        <div class="relative px-6 py-12 max-w-4xl mx-auto">
+            <div class="floating">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24 mx-auto text-pink-500" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+                </svg>
+            </div>
+            <h1 class="text-5xl md:text-6xl font-bold text-pink-700 mt-6 mb-4">For My Amazing Girlfriend</h1>
+            <p class="text-xl md:text-2xl text-pink-600">Scroll down to discover a special surprise...</p>
+            <div class="mt-12">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-pink-400 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
             </div>
         </div>
-
-        <div class="gif-box">
-            <img src="https://media.tenor.com/nlvrshfFZz0AAAAM/kids-birthday-kid%27s-birthday.gif" height=200 width = 200>
-        </div>
-        
-        <div class="countdown-container">
-            <div class="countdown-title">Countdown to Your Special Day</div>
-            <div id="countdown" class="countdown">
-                <div class="countdown-item">
-                    <div id="days" class="countdown-number">00</div>
-                    <div class="countdown-label">Days</div>
-                </div>
-                <div class="countdown-item">
-                    <div id="hours" class="countdown-number">00</div>
-                    <div class="countdown-label">Hours</div>
-                </div>
-                <div class="countdown-item">
-                    <div id="minutes" class="countdown-number">00</div>
-                    <div class="countdown-label">Minutes</div>
-                </div>
-                <div class="countdown-item">
-                    <div id="seconds" class="countdown-number">00</div>
-                    <div class="countdown-label">Seconds</div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="message-box">
-            <div class="message-title">Today's Special Message</div>
-            <div id="today-message" class="message-content">
-                Every day with you is a blessing. I can't wait to celebrate your special day!
-                Your smile is my favorite thing in the world.
-            </div>
-        </div>
-        
-        <div class="music-player">
-            <div class="music-title">Romantic Hindi Song For You</div>
-            <audio controls autoplay loop style="width: 100%;">
-                <source src="https://github.com/Rupeshpandey09/12/raw/refs/heads/main/Na%20Kuch%20Poocha%20Na%20Kuch%20Manga%20Song%23%20Whatsapp%20Status%23%20Na%20Kuch%20Poocha%20Na%20Kuch%20Manga%20female%20lyrical%20song%20%5BB1WaNG7nsDU%5D.mp3" type="audio/mpeg">
-                Your browser does not support the audio element.
-            </audio>
-        </div>
-        
-        <footer>
-            Made with love for your special day on August 21st
-        </footer>
     </div>
 
+    <section class="py-20 px-6 bg-white">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12 reveal">
+                <h2 class="text-4xl font-bold text-pink-700 mb-4">Reasons Why I Love You</h2>
+                <p class="text-xl text-gray-600">Click each card to discover what makes you so special</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="flip-card h-64 reveal">
+                    <div class="flip-card-inner h-full rounded-lg shadow-lg">
+                        <div class="flip-card-front bg-pink-50 flex items-center justify-center p-6 rounded-lg">
+                            <h3 class="text-2xl text-pink-700 font-bold text-center">Reason #1</h3>
+                        </div>
+                        <div class="flip-card-back bg-pink-100 flex items-center justify-center p-6 rounded-lg">
+                            <p class="text-lg text-pink-800">Your beautiful smile that brightens my darkest days</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flip-card h-64 reveal" style="transition-delay: 0.1s">
+                    <div class="flip-card-inner h-full rounded-lg shadow-lg">
+                        <div class="flip-card-front bg-pink-50 flex items-center justify-center p-6 rounded-lg">
+                            <h3 class="text-2xl text-pink-700 font-bold text-center">Reason #2</h3>
+                        </div>
+                        <div class="flip-card-back bg-pink-100 flex items-center justify-center p-6 rounded-lg">
+                            <p class="text-lg text-pink-800">The way you understand me without me saying a word</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flip-card h-64 reveal" style="transition-delay: 0.2s">
+                    <div class="flip-card-inner h-full rounded-lg shadow-lg">
+                        <div class="flip-card-front bg-pink-50 flex items-center justify-center p-6 rounded-lg">
+                            <h3 class="text-2xl text-pink-700 font-bold text-center">Reason #3</h3>
+                        </div>
+                        <div class="flip-card-back bg-pink-100 flex items-center justify-center p-6 rounded-lg">
+                            <p class="text-lg text-pink-800">How you make ordinary moments feel extraordinary</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flip-card h-64 reveal" style="transition-delay: 0.3s">
+                    <div class="flip-card-inner h-full rounded-lg shadow-lg">
+                        <div class="flip-card-front bg-pink-50 flex items-center justify-center p-6 rounded-lg">
+                            <h3 class="text-2xl text-pink-700 font-bold text-center">Reason #4</h3>
+                        </div>
+                        <div class="flip-card-back bg-pink-100 flex items-center justify-center p-6 rounded-lg">
+                            <p class="text-lg text-pink-800">Your strength and courage that inspires me every day</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 px-6 bg-pink-50">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-12 reveal">
+                <h2 class="text-4xl font-bold text-pink-700 mb-4">Our Beautiful Memories</h2>
+                <p class="text-xl text-gray-600">These moments with you are my most treasured</p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="gallery-item rounded-lg overflow-hidden shadow-lg reveal">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/5750e843-6dbe-41da-bb7a-17f48861a4c7.png" alt="Romantic first date at a cozy restaurant with candlelight and wine glasses" class="w-full h-64 object-cover">
+                    <div class="p-6 bg-white">
+                        <h3 class="text-xl font-bold text-pink-700 mb-2">Our First Date</h3>
+                        <p class="text-gray-600">The night I knew you were someone special</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item rounded-lg overflow-hidden shadow-lg reveal" style="transition-delay: 0.1s">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/774a34ef-d691-41bb-81ff-fbefe8e43274.png" alt="Couple smiling and holding hands on a tropical beach with palm trees" class="w-full h-64 object-cover">
+                    <div class="p-6 bg-white">
+                        <h3 class="text-xl font-bold text-pink-700 mb-2">Our Vacation</h3>
+                        <p class="text-gray-600">Exploring new places hand in hand</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item rounded-lg overflow-hidden shadow-lg reveal" style="transition-delay: 0.2s">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/bb3b228b-97d7-440b-aa38-3c9c121d5840.png" alt="Couple celebrating anniversary with champagne toast and romantic dinner" class="w-full h-64 object-cover">
+                    <div class="p-6 bg-white">
+                        <h3 class="text-xl font-bold text-pink-700 mb-2">Our Anniversary</h3>
+                        <p class="text-gray-600">Celebrating another year of love</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center reveal" style="transition-delay: 0.3s">
+                <button id="moreMemoriesBtn" class="px-6 py-3 bg-pink-500 text-white rounded-full font-semibold hover:bg-pink-600 transition duration-300">
+                    Show Me More Memories
+                </button>
+                <div id="moreMemories" class="hidden mt-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="gallery-item rounded-lg overflow-hidden shadow-lg">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/6fe98445-89c9-4143-977e-b88211d68e09.png" alt="Couple cooking together in a modern kitchen, laughing and enjoying each other's company" class="w-full h-64 object-cover">
+                            <div class="p-6 bg-white">
+                                <h3 class="text-xl font-bold text-pink-700 mb-2">Everyday Life</h3>
+                                <p class="text-gray-600">Even ordinary days are magical with you</p>
+                            </div>
+                        </div>
+                        
+                        <div class="gallery-item rounded-lg overflow-hidden shadow-lg">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/65b8a0c9-6909-46ab-b9ae-57a48bc4be6d.png" alt="Couple hiking in the mountains with breathtaking views in the background" class="w-full h-64 object-cover">
+                            <div class="p-6 bg-white">
+                                <h3 class="text-xl font-bold text-pink-700 mb-2">Our Adventures</h3>
+                                <p class="text-gray-600">Facing challenges together makes us stronger</p>
+                            </div>
+                        </div>
+                        
+                        <div class="gallery-item rounded-lg overflow-hidden shadow-lg">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3d269c69-3cc2-4fa8-859a-cd499e971666.png" alt="Couple cuddling on a couch watching a movie with cozy blankets" class="w-full h-64 object-cover">
+                            <div class="p-6 bg-white">
+                                <h3 class="text-xl font-bold text-pink-700 mb-2">Quiet Times</h3>
+                                <p class="text-gray-600">Your presence makes every moment peaceful</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 px-6 bg-white">
+        <div class="max-w-4xl mx-auto">
+            <div class="reveal">
+                <div class="bg-pink-50 rounded-xl p-8 md:p-12 shadow-lg">
+                    <div class="flex flex-col md:flex-row items-center">
+                        <div class="md:w-1/3 mb-6 md:mb-0">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/6e651919-763a-4557-b4d5-e13122d6228f.png" alt="Close-up of a handwritten love letter with a red wax seal on pink paper" class="w-full h-auto rounded-lg shadow-md">
+                        </div>
+                        <div class="md:w-2/3 md:pl-10">
+                            <h2 class="text-3xl font-bold text-pink-700 mb-4">A Letter Just For You</h2>
+                            <div class="prose max-w-none text-gray-700">
+                                <p>My love,</p>
+                                <p>From the moment we met, you've brought light into my life in ways I never imagined possible. Every day with you is a gift that I cherish deeply.</p>
+                                <p>I love how [personal trait you adore] makes you uniquely you. The way you [specific behavior or habit] shows your incredible [quality]. And when you [another specific thing], my heart overflows with love.</p>
+                                <p>What I want you to know most of all is that you are loved beyond measure, appreciated beyond words, and cherished beyond time.</p>
+                                <p>Forever yours,</p>
+                                <p>________</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 px-6 bg-pink-50">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="reveal">
+                <h2 class="text-4xl font-bold text-pink-700 mb-6">Today's Romantic Thought</h2>
+                <div class="bg-white p-8 rounded-lg shadow-lg mb-8">
+                    <p id="romanticQuote" class="text-2xl text-gray-800 italic mb-4">"Love is not about how many days, weeks or months you've been together, it's all about how much you love each other every day."</p>
+                    <button id="newQuoteBtn" class="px-6 py-2 bg-pink-500 text-white rounded-full font-semibold hover:bg-pink-600 transition duration-300">
+                        Another Thought
+                    </button>
+                </div>
+                <div class="mt-12">
+                    <p class="text-xl text-pink-700 font-semibold mb-4">I love you more than words can express</p>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-pink-500 mx-auto" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-pink-800 text-white py-12 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="mb-8">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-pink-300" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+                </svg>
+                <h3 class="text-2xl font-bold mt-2">Made With Love</h3>
+            </div>
+            <p class="text-pink-200 mb-4">This website was created to remind you how incredibly special you are</p>
+            <p class="text-pink-300 text-sm">Hover over the heart below for a secret message</p>
+            <div class="mt-6 group">
+                <div class="relative inline-block">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-pink-400 group-hover:text-pink-300 transition duration-300" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+                    </svg>
+                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                        <span class="text-white font-bold">Always & Forever</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
     <script>
-        // Countdown to August 21st
-        function updateCountdown() {
-            const now = new Date();
-            const currentYear = now.getFullYear();
-            
-            // Set target date to August 21st of current year
-            let targetDate = new Date(currentYear, 7, 21); // Month is 0-indexed (7 = August)
-            
-            // If August 21st has already passed this year, use next year
-            if (now > targetDate) {
-                targetDate = new Date(currentYear + 1, 7, 21);
-            }
-            
-            const timeRemaining = targetDate - now;
-            
-            const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
-            
-            document.getElementById('days').textContent = days.toString().padStart(2, '0');
-            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        // Scroll reveal animation
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        function checkReveal() {
+            revealElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('visible');
+                }
+            });
         }
         
-        // Update countdown every second
-        setInterval(updateCountdown, 1000);
-        updateCountdown(); // Initial call
+        window.addEventListener('scroll', checkReveal);
+        window.addEventListener('load', checkReveal);
         
-        // Array of romantic messages to display
-        const messages = [
-            "You make my heart skip a beat every time I see you.",
-            "Every moment with you is like a beautiful dream I never want to wake up from.",
-            "Your smile is my favorite thing in the world.",
-            "I fall in love with you more each day.",
-            "You are the missing piece that makes my life complete.",
-            "The way you love me makes every day worth living.",
-            "I cherish every memory we've made and look forward to all the ones we'll create.",
-            "Your laughter is my favorite melody.",
-            "Being with you feels like home.",
-            "I never knew happiness until I met you.",
-            "My love for you grows stronger with each passing moment.",
-            "You are the reason I believe in love.",
-            "Every love song reminds me of you.",
-            "You are my today and all of my tomorrows.",
-            "I love you more than words can express."
+        // More memories button
+        const moreMemoriesBtn = document.getElementById('moreMemoriesBtn');
+        const moreMemories = document.getElementById('moreMemories');
+        
+        moreMemoriesBtn.addEventListener('click', function() {
+            moreMemories.classList.toggle('hidden');
+            this.textContent = moreMemories.classList.contains('hidden') ? 'Show Me More Memories' : 'Hide Memories';
+        });
+        
+        // Romantic quotes
+        const quotes = [
+            "Love is when the other person's happiness is more important than your own.",
+            "You don't love someone for their looks, or their clothes, or for their fancy car, but because they sing a song only you can hear.",
+            "The best thing to hold onto in life is each other.",
+            "I saw that you were perfect, and so I loved you. Then I saw that you were not perfect and I loved you even more.",
+            "Love is composed of a single soul inhabiting two bodies.",
+            "If I had a flower for every time I thought of you, I could walk through my garden forever.",
+            "Grow old with me, the best is yet to be.",
+            "You're the closest to heaven that I'll ever be.",
+            "I love you not only for what you are, but for what I am when I'm with you."
         ];
         
-        // Display a new message each day
-        function updateDailyMessage() {
-            const today = new Date();
-            const dayOfMonth = today.getDate();
-            
-            // Use day of month to cycle through messages (modulus ensures it stays within array bounds)
-            const messageIndex = (dayOfMonth - 1) % messages.length;
-            document.getElementById('today-message').textContent = messages[messageIndex];
+        const romanticQuote = document.getElementById('romanticQuote');
+        const newQuoteBtn = document.getElementById('newQuoteBtn');
+        
+        function getRandomQuote() {
+            return quotes[Math.floor(Math.random() * quotes.length)];
         }
         
-        updateDailyMessage();
-        
-        // Auto-play music (with user gesture check for mobile browsers)
-        document.addEventListener('click', function() {
-            const audio = document.querySelector('audio');
-            audio.play().catch(e => console.log("Auto-play prevented:", e));
-        }, { once: true });
+        newQuoteBtn.addEventListener('click', function() {
+            romanticQuote.textContent = getRandomQuote();
+        });
     </script>
 </body>
-
 </html>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
